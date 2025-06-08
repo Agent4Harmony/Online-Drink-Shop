@@ -22,8 +22,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.onlinedrinkshop.data.models.Category
-import com.example.onlinedrinkshop.data.models.Drink
 import com.example.onlinedrinkshop.ui.screens.auth.LoginScreen
 import com.example.onlinedrinkshop.ui.screens.auth.RegisterScreen
 import com.example.onlinedrinkshop.ui.screens.cart.CartScreen
