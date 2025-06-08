@@ -16,12 +16,15 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.onlinedrinkshop.data.models.Category
+import com.example.onlinedrinkshop.data.models.Drink
 import com.example.onlinedrinkshop.ui.screens.auth.LoginScreen
 import com.example.onlinedrinkshop.ui.screens.auth.RegisterScreen
 import com.example.onlinedrinkshop.ui.screens.cart.CartScreen
@@ -52,15 +55,15 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun TeaShopApp(viewModel: MainViewModel) {
     val navController = rememberNavController()
-    val currentUser by viewModel.currentUser.collectAsState()
-    val uiState by viewModel.uiState.collectAsState()
-    val categories by viewModel.categories.collectAsState()
-    val drinks by viewModel.drinks.collectAsState()
-    val toppings by viewModel.toppings.collectAsState()
-    val cartItems by viewModel.cartItems.collectAsState()
-    val searchResults by viewModel.searchResults.collectAsState()
-    val orders by viewModel.orders.collectAsState()
-    val popularDrinks by viewModel.popularDrinks.collectAsState()
+    val currentUser by viewModel.currentUser.collectAsStateWithLifecycle()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val categories by viewModel.categories.collectAsStateWithLifecycle()
+    val drinks by viewModel.drinks.collectAsStateWithLifecycle()
+    val toppings by viewModel.toppings.collectAsStateWithLifecycle()
+    val cartItems by viewModel.cartItems.collectAsStateWithLifecycle()
+    val searchResults by viewModel.searchResults.collectAsStateWithLifecycle()
+    val orders by viewModel.orders.collectAsStateWithLifecycle()
+    val popularDrinks by viewModel.popularDrinks.collectAsStateWithLifecycle()
 
     // Clear error when it's shown
     LaunchedEffect(uiState.errorMessage) {
