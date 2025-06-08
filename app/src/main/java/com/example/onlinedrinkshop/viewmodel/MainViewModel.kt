@@ -10,23 +10,23 @@ import kotlinx.coroutines.launch
 class MainViewModel : ViewModel() {
     private val repository = DataRepository()
 
-    val currentUser = repository.currentUser.asStateFlow()
-    val categories = repository.categories.asStateFlow()
-    val drinks = repository.drinks.asStateFlow()
-    val toppings = repository.toppings.asStateFlow()
-    val cartItems = repository.cartItems.asStateFlow()
+    val currentUser: StateFlow<User?> = repository.currentUser
+    val categories: StateFlow<List<Category>> = repository.categories
+    val drinks: StateFlow<List<Drink>> = repository.drinks
+    val toppings: StateFlow<List<Topping>> = repository.toppings
+    val cartItems: StateFlow<List<CartItem>> = repository.cartItems
 
     private val _uiState = MutableStateFlow(UiState())
-    val uiState = _uiState.asStateFlow()
+    val uiState: StateFlow<UiState> = _uiState.asStateFlow()
 
     private val _searchResults = MutableStateFlow<List<Drink>>(emptyList())
-    val searchResults = _searchResults.asStateFlow()
+    val searchResults: StateFlow<List<Drink>> = _searchResults.asStateFlow()
 
     private val _orders = MutableStateFlow<List<Order>>(emptyList())
-    val orders = _orders.asStateFlow()
+    val orders: StateFlow<List<Order>> = _orders.asStateFlow()
 
-    val popularDrinks = drinks.map { drinks ->
-        drinks.filter { it.isPopular }
+    val popularDrinks: StateFlow<List<Drink>> = drinks.map { drinksList ->
+        drinksList.filter { drink -> drink.isPopular }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
 
     fun login(email: String, password: String) {
